@@ -146,8 +146,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MHI.cpp" />
+    <ClCompile Include="ProcessFiles.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MHI.h" />
+    <ClInclude Include="ProcessFiles.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\opencvcontrib.redist.3.1.0\build\native\opencvcontrib.redist.targets" Condition="Exists('..\packages\opencvcontrib.redist.3.1.0\build\native\opencvcontrib.redist.targets')" />
+    <Import Project="..\packages\opencvcontrib.3.1.0\build\native\opencvcontrib.targets" Condition="Exists('..\packages\opencvcontrib.3.1.0\build\native\opencvcontrib.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\opencvcontrib.redist.3.1.0\build\native\opencvcontrib.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\opencvcontrib.redist.3.1.0\build\native\opencvcontrib.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\opencvcontrib.3.1.0\build\native\opencvcontrib.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\opencvcontrib.3.1.0\build\native\opencvcontrib.targets'))" />
+  </Target>
 </Project>
